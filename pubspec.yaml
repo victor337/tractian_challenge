@@ -45,6 +45,9 @@ dependencies:
   # State Manager
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
+  dartz: ^0.10.1
+  injectable: ^2.4.4
+  
 
 
 dev_dependencies:
@@ -53,6 +56,10 @@ dev_dependencies:
 
   # Mock tests
   mockito: ^5.4.4
+
+  # Dependecies Injection
+  injectable_generator: ^2.6.2
+  build_runner: ^2.4.12
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
