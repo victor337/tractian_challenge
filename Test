@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Define o ambiente padrão como "default"
+environment="default"
+
+# Extrai o flavor do nome da configuração do build (Debug-dev, Release-prod, etc.)
+if [[ $CONFIGURATION =~ -([^-]*)$ ]]; then
+  environment=${BASH_REMATCH[1]}
+fi
+
+echo "Environment: $environment"
+
+# Caminho do arquivo GoogleService-Info.plist
+GOOGLESERVICE_INFO_PLIST="GoogleService-Info.plist"
+GOOGLESERVICE_INFO_FILE="${PROJECT_DIR}/config/${environment}/${GOOGLESERVICE_INFO_PLIST}"
+
+# Verifica se o arquivo existe
+echo "Procurando por ${GOOGLESERVICE_INFO_PLIST} em ${GOOGLESERVICE_INFO_FILE}"
+if [ ! -f "$GOOGLESERVICE_INFO_FILE" ]; then
+  echo "Arquivo GoogleService-Info.plist não encontrado. Certifique-se de que ele está no diretório correto."
+  exit 1
+fi
+
+# Caminho de destino onde o arquivo será copiado
+PLIST_DESTINATION="${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app"
+
+echo "Copiando ${GOOGLESERVICE_INFO_PLIST} para o destino final: ${PLIST_DESTINATION}"
+
+# Copia o arquivo para o local esperado pelo Firebase
+cp "$GOOGLESERVICE_INFO_FILE" "$PLIST_DESTINATION"
